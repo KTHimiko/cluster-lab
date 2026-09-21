@@ -56,6 +56,12 @@ computação de alto desempenho operam em produção.
 | Apptainer nos três nós, container via `srun` | **feito** |
 | Pipeline nf-core executado no cluster | pendente |
 
+## Material de estudo
+
+Três documentos didáticos que reconstroem o cluster do zero, explicando cada
+etapa e o porquê dela, com perguntas de recuperação e calendário de revisão:
+[`docs/estudo/`](docs/estudo/00-como-usar.md).
+
 ## Continuidade
 
 Ao retomar em outra máquina ou depois de uma pausa, leia `CONTEXT.md` primeiro.
