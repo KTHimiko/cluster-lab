@@ -11,3 +11,6 @@ id_ed25519*
 # ruído de editor
 *.swp
 .DS_Store
+
+# cloud-init gerado (contém chave pública e hostname da máquina)
+build/

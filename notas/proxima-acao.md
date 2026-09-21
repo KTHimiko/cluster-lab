@@ -5,8 +5,8 @@
 > É isso que devolve o contexto no sábado seguinte em dois minutos em vez de
 > quarenta.
 
-**Agora:** Etapa 2 de `docs/01-sessao-sabado.md` — criar o pool de
-armazenamento, depois baixar a imagem base do Debian.
+**Agora:** Etapas 2 e 3 de `docs/01-sessao-sabado.md` — pool de armazenamento
+e imagem base do Debian. O cloud-init do head já está gerado em `build/`.
 
 ---
 
@@ -56,3 +56,13 @@ O que quebrou é a parte mais valiosa — é o que vira resposta em entrevista.
 - aprendi: bridge Linux sem porta anexada fica em `NO-CARRIER`; a interface
   está administrativamente UP e o `ip -br` reporta o operstate. Sobe sozinha
   quando a primeira VM criar o vnet0.
+
+### 2026-09-21 — chave SSH e template de cloud-init
+- feito: par de chaves ed25519 gerado nesta máquina; criado
+  `scripts/render-cloud-init.sh`, que injeta a chave e o hostname no template
+  e escreve em `build/` (não versionado).
+- quebrou: eu tinha assumido que a chave existia aqui, mas ela estava só na
+  máquina secundária — o `sed` de injeção teria falhado silenciosamente.
+- aprendi: material específico da máquina (chave, hostname) não entra no
+  repositório. Versiona-se o template e gera-se o resto; assim o repositório
+  fica publicável sem decisão sobre o que expor.
