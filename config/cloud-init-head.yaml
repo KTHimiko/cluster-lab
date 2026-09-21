@@ -1,11 +1,11 @@
 #cloud-config
-# Provisionamento do nó head. Usado por virt-install via --cloud-init.
-# Para os nós de cálculo, copie este arquivo trocando apenas o hostname.
+# Template de provisionamento de nó. Use scripts/render-cloud-init.sh, que
+# injeta a chave pública e o hostname, e scripts/make-seed.sh para o ISO.
 
 hostname: head
 fqdn: head.lab
 prefer_fqdn_over_hostname: false
-manage_etc_hosts: true
+manage_etc_hosts: false   # gerenciamos /etc/hosts pelo config/hosts do cluster
 
 users:
   - name: luan

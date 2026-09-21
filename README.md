@@ -49,10 +49,10 @@ computação de alto desempenho operam em produção.
 | Imagem base Debian + disco copy-on-write | **feito** |
 | VM base provisionada com cloud-init | **feito** |
 | SLURM em nó único (`srun hostname`) | **feito** |
-| Clonagem para 3 nós | pendente |
-| MUNGE com chave compartilhada | pendente |
-| NFS entre head e nós | pendente |
-| `srun -N2 hostname` nos dois nós | pendente |
+| Três nós provisionados (sem clonagem) | **feito** |
+| MUNGE com chave compartilhada | **feito** |
+| NFS entre head e nós | **feito** |
+| `srun -N2 hostname` nos dois nós | **feito** |
 | Apptainer instalado | pendente |
 | Pipeline nf-core executado no cluster | pendente |
 

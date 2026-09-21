@@ -82,7 +82,9 @@ comandos e o dimensionamento, não necessariamente.
 
 ## Estado atual
 
-Sessão 1 (sábado) concluída — todas as etapas de 0 a 5:
+Cluster de três nós operacional.
+
+Sessão 1 (sábado) — etapas 0 a 5:
 
 - rede `default` do libvirt ativa com autostart, NAT e DHCP funcionando
 - pool de armazenamento `default` ativo
@@ -93,8 +95,18 @@ Sessão 1 (sábado) concluída — todas as etapas de 0 a 5:
 - SLURM 22.05.8 e MUNGE 0.5.15 no `head`: `srun`, `srun -n2` e `sbatch`
   verificados, nó em estado `idle`
 
-**A sessão 1 (sábado) está completa** — a meta mínima era `srun hostname`
-responder, e responde. A próxima é a sessão 2 (domingo): clonar para três
-nós, distribuir a chave do MUNGE, montar o NFS e fechar com `srun -N2`.
+Sessão 2 (domingo) também concluída:
+
+- três nós com IPs fixos por reserva DHCP: `head` .10, `node01` .11,
+  `node02` .12 — criados do zero, sem `virt-clone`
+- `/etc/hosts` idêntico nos três, sem a linha `127.0.1.1` que o cloud-init
+  escreve e que quebra o registro do `slurmd`
+- MUNGE com a mesma chave nos três, validado por autenticação cruzada
+- NFS: `/home` do head montado nos dois nós
+- SLURM multi-nó: `srun -N2` e `srun -N3` verificados, além de um job em
+  lote de 6 tarefas distribuídas pelos três nós
+
+**As duas sessões planejadas estão completas.** A próxima é Apptainer e o
+primeiro pipeline `nf-core` rodando sobre o cluster.
 
 Próxima ação concreta: ver `notas/proxima-acao.md`.

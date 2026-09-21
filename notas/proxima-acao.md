@@ -5,8 +5,8 @@
 > É isso que devolve o contexto no sábado seguinte em dois minutos em vez de
 > quarenta.
 
-**Agora:** sessão 2 (domingo) — `docs/02-sessao-domingo.md`. Clonar o head em
-node01 e node02, MUNGE com chave compartilhada, NFS, e fechar com `srun -N2`.
+**Agora:** sessão 3 — Apptainer nos três nós, depois Nextflow com perfil
+SLURM. Acesso: `ssh luan@192.168.122.10` (head).
 
 ---
 
@@ -103,3 +103,19 @@ O que quebrou é a parte mais valiosa — é o que vira resposta em entrevista.
   `drain` por divergência entre o detectado e o configurado.
 - aprendi: `RealMemory` no slurm.conf precisa ficar abaixo da memória real
   (3800 para 3927 MB) — se passar, o nó é marcado como inválido.
+
+### 2026-09-21 — sessão 2 completa, cluster de três nós no ar
+- feito: node01 e node02 criados do zero (sem virt-clone), IPs fixos por
+  reserva DHCP, /etc/hosts uniforme, MUNGE com chave compartilhada validado
+  por autenticação cruzada, NFS do /home, SLURM multi-nó. `srun -N2`,
+  `srun -N3` e job em lote de 6 tarefas nos três nós, todos verificados.
+- quebrou: duas coisas. (1) O cloud-init escreve `127.0.1.1 <hostname>` no
+  /etc/hosts, fazendo cada nó resolver o próprio nome para loopback — quebra
+  o registro do slurmd com sintoma confuso. (2) Um comando meu falhou com
+  exit 127 porque zsh não faz divisão em palavras de variável não-citada como
+  o bash faz; `$SSH` virou um comando único inexistente.
+- aprendi: (1) evitar virt-clone em cluster — machine-id duplicado faz o
+  systemd-networkd pedir o mesmo IP para todos os clones. (2) O teste que
+  vale no MUNGE é a validação cruzada (`munge -n` num nó, `unmunge` no
+  outro), não comparar md5 da chave: md5 igual com relógio dessincronizado
+  ainda falha. (3) Em zsh, use função ou `${=var}` para dividir argumentos.

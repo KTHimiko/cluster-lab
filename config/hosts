@@ -1,7 +1,17 @@
 # /etc/hosts do cluster — idêntico nos três nós.
-# Os endereços são reservas DHCP fixas na rede libvirt `default`,
+#
+# Os endereços vêm de reservas DHCP fixas na rede libvirt `default`,
 # criadas com `virsh net-update default add ip-dhcp-host`.
-# Sem endereço estável, slurm.conf e NFS quebram a cada reboot.
-192.168.122.10  head
-192.168.122.11  node01
-192.168.122.12  node02
+#
+# Note a AUSÊNCIA de uma linha `127.0.1.1 <hostname>`: o cloud-init a escreve
+# por padrão (manage_etc_hosts), e ela faz um nó resolver o próprio nome para
+# loopback. Num cluster isso quebra o registro do slurmd no controlador, com
+# sintoma confuso — o nó aparece, mas não aceita trabalho.
+127.0.0.1       localhost
+192.168.122.10  head    head.lab
+192.168.122.11  node01  node01.lab
+192.168.122.12  node02  node02.lab
+
+::1             localhost ip6-localhost ip6-loopback
+ff02::1         ip6-allnodes
+ff02::2         ip6-allrouters
