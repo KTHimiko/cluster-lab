@@ -82,9 +82,16 @@ comandos e o dimensionamento, não necessariamente.
 
 ## Estado atual
 
-Nada foi executado ainda. Nenhuma VM criada, nenhum serviço configurado. O
-repositório contém apenas documentação de execução e configuração de partida.
+Sessão 1 (sábado) em andamento, etapas 0 a 4 concluídas:
+
+- rede `default` do libvirt ativa com autostart, NAT e DHCP funcionando
+- pool de armazenamento `default` ativo
+- imagem base do Debian 12 e disco copy-on-write do `head`
+- nó `head` no ar e acessível por SSH, provisionado por cloud-init:
+  hostname correto, usuário `luan` com sudo sem senha, chrony ativo e
+  relógio sincronizado
+
+Falta a etapa 5 — SLURM e MUNGE dentro do `head` — para fechar a meta mínima
+do sábado, que é `srun hostname` responder.
 
 Próxima ação concreta: ver `notas/proxima-acao.md`.
-
-O nó `head` já está no ar e acessível por SSH; falta o SLURM (Etapa 5).
