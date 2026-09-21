@@ -55,6 +55,10 @@ computação de alto desempenho operam em produção.
 | Apptainer instalado | pendente |
 | Pipeline nf-core executado no cluster | pendente |
 
+## Continuidade
+
+Ao retomar em outra máquina ou depois de uma pausa, leia `CONTEXT.md` primeiro.
+
 ## Estrutura
 
 ```
