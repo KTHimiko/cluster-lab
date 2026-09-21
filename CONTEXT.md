@@ -106,7 +106,15 @@ Sessão 2 (domingo) também concluída:
 - SLURM multi-nó: `srun -N2` e `srun -N3` verificados, além de um job em
   lote de 6 tarefas distribuídas pelos três nós
 
-**As duas sessões planejadas estão completas.** A próxima é Apptainer e o
-primeiro pipeline `nf-core` rodando sobre o cluster.
+Sessão 3 (Apptainer) também concluída:
+
+- Apptainer 1.5.3 nos três nós, variante **sem setuid** (o kernel do guest
+  tem namespaces de usuário sem privilégio habilitados)
+- imagens no `/home` compartilhado: `alpine.sif` e `fastqc.sif`, este último
+  do `quay.io/biocontainers`, o registro que os módulos nf-core usam
+- `srun -N3 apptainer exec` e um sbatch de exemplo verificados: FastQC
+  v0.12.1 respondendo nos três nós a partir de uma única imagem
+
+**Próxima:** sessão 4 — Nextflow com perfil SLURM.
 
 Próxima ação concreta: ver `notas/proxima-acao.md`.

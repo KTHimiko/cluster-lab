@@ -5,8 +5,8 @@
 > É isso que devolve o contexto no sábado seguinte em dois minutos em vez de
 > quarenta.
 
-**Agora:** sessão 3 — Apptainer nos três nós, depois Nextflow com perfil
-SLURM. Acesso: `ssh luan@192.168.122.10` (head).
+**Agora:** sessão 4 — Nextflow com perfil SLURM, submetendo cada processo do
+pipeline como um job. Acesso: `ssh luan@192.168.122.10` (head).
 
 ---
 
@@ -119,3 +119,21 @@ O que quebrou é a parte mais valiosa — é o que vira resposta em entrevista.
   vale no MUNGE é a validação cruzada (`munge -n` num nó, `unmunge` no
   outro), não comparar md5 da chave: md5 igual com relógio dessincronizado
   ainda falha. (3) Em zsh, use função ou `${=var}` para dividir argumentos.
+
+### 2026-09-21 — sessão 3: containers no cluster
+- feito: Apptainer 1.5.3 nos três nós (variante sem setuid), imagens no /home
+  compartilhado, `srun -N3 apptainer exec` e sbatch de exemplo verificados
+  com FastQC real do quay.io/biocontainers.
+- quebrou: nada. O Apptainer não existe nos repositórios do Debian 12 — nem
+  como `apptainer` nem como `singularity-container` — então veio do .deb
+  oficial do upstream.
+- aprendi: (1) o NFS paga dividendos além dos dados: baixei o .deb de 32 MB
+  uma vez e instalei nos três a partir do mesmo arquivo, mesmo princípio de
+  uma imagem servir o cluster inteiro. (2) `APPTAINER_CACHEDIR` deve ficar em
+  disco local; só a imagem final vai para o NFS, porque travamento de arquivo
+  sobre NFS é frágil. (3) A variante sem setuid funciona porque
+  max_user_namespaces > 0 no guest — é a escolha certa, menos superfície de
+  ataque que o binário privilegiado.
+
+**Nota:** commits desta sessão ainda NÃO foram publicados no GitHub, a pedido.
+Para publicar: `git push origin master`.

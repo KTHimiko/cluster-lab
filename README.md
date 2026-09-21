@@ -38,7 +38,7 @@ computação de alto desempenho operam em produção.
 | Agendador | SLURM (`slurmctld`, `slurmd`) |
 | Autenticação de nós | MUNGE (chave compartilhada) |
 | Armazenamento | NFS (`/home` exportado do head) |
-| Containers | Apptainer |
+| Containers | Apptainer 1.5.3 (sem setuid) |
 | Orquestração de workflow | Nextflow + nf-core |
 
 ## Estado
@@ -53,7 +53,7 @@ computação de alto desempenho operam em produção.
 | MUNGE com chave compartilhada | **feito** |
 | NFS entre head e nós | **feito** |
 | `srun -N2 hostname` nos dois nós | **feito** |
-| Apptainer instalado | pendente |
+| Apptainer nos três nós, container via `srun` | **feito** |
 | Pipeline nf-core executado no cluster | pendente |
 
 ## Continuidade
