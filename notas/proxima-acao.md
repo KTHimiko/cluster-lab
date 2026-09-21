@@ -5,7 +5,8 @@
 > É isso que devolve o contexto no sábado seguinte em dois minutos em vez de
 > quarenta.
 
-**Agora:** habilitar o libvirtd (`sudo systemctl enable --now libvirtd`), abrir uma
+**Agora:** Etapa 2 de `docs/01-sessao-sabado.md` — criar o pool de
+armazenamento, depois baixar a imagem base do Debian.
 sessão nova para o grupo `libvirt` valer, e seguir para a Etapa 1 — definir a
 rede do libvirt.
 `docs/01-sessao-sabado.md`), relogar para o grupo `libvirt` valer, e conferir
@@ -51,3 +52,11 @@ O que quebrou é a parte mais valiosa — é o que vira resposta em entrevista.
 - aprendi: `qemu:///session` e `qemu:///system` são espaços completamente
   separados. Fixar `LIBVIRT_DEFAULT_URI=qemu:///system` no shell evita horas
   de confusão. O guia e o recon.sh foram corrigidos.
+
+### 2026-09-21 — etapa 1 concluída
+- feito: rede `default` ativa e com autostart em `qemu:///system`; dnsmasq
+  servindo DHCP em 192.168.122.2-254; 7 regras de NAT no nftables.
+- quebrou: nada — mas `ip -br addr` mostra `virbr0 DOWN` e isso parece falha.
+- aprendi: bridge Linux sem porta anexada fica em `NO-CARRIER`; a interface
+  está administrativamente UP e o `ip -br` reporta o operstate. Sobe sozinha
+  quando a primeira VM criar o vnet0.

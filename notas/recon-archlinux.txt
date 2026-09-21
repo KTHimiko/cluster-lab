@@ -7,12 +7,12 @@ PRETTY_NAME="Arch Linux"
 CPU(s): 16
 Nome do modelo: AMD Ryzen 7 5800X 8-Core Processor
 Thread(s) per núcleo: 2
-CPU(s) MHz de escala: 54%
+CPU(s) MHz de escala: 59%
 CPU(s) de nó0 NUMA: 0-15
 
 == memória
                total       usada       livre    compart.  buff/cache  disponível
-Mem.:           46Gi       2,5Gi        39Gi        43Mi       5,6Gi        44Gi
+Mem.:           46Gi       2,4Gi        39Gi        43Mi       5,8Gi        44Gi
 
 == disco
 /dev/sda2       246G  150G   94G  62% /
@@ -66,9 +66,9 @@ padrão desta sessão: qemu:///session
 consultado abaixo:   qemu:///system
 
 == redes libvirt
- Nome      Estado    Auto-iniciar   Persistente
--------------------------------------------------
- default   inativo   não            sim
+ Nome      Estado   Auto-iniciar   Persistente
+------------------------------------------------
+ default   ativo    sim            sim
 
 
 == pools de armazenamento
@@ -82,6 +82,6 @@ consultado abaixo:   qemu:///system
 
 
 == capacidade estimada
-memória disponível: 45491 MB  ->  20 nós de 2 GB (reservando 4 GB ao hospedeiro)
+memória disponível: 45566 MB  ->  20 nós de 2 GB (reservando 4 GB ao hospedeiro)
 disco livre em /: 94 GB
 
