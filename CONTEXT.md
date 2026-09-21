@@ -53,17 +53,26 @@ roteiro. Um projeto, dois objetivos.
 Os comandos em `docs/01-sessao-sabado.md` foram escritos para uma máquina
 específica:
 
+Os comandos estão calibrados para a **máquina principal** (`192.168.0.10`):
+
 ```
-Arch Linux · kernel 7.2 · 8 threads · 15 GB RAM · 292 GB livres
-libvirt 12.7 · qemu 11.1 · dnsmasq presente
-usuário nos grupos libvirt, docker, wheel
-estado inicial: nenhuma rede libvirt definida, nenhum pool de storage
+Arch Linux · kernel 7.2.4 · Ryzen 7 5800X, 16 threads · 46 GB RAM
+53 GB livres em / (disco a 79% — a restrição desta máquina)
+/dev/kvm presente · VirtualBox 7.2 instalado e convivendo
+estado inicial: nenhuma ferramenta de virtualização instalada
 ```
 
-**Em outra máquina, refaça esse levantamento antes de seguir os comandos.**
-Distribuição, gerenciador de pacotes, versão do libvirt e estado inicial mudam
-os passos. A arquitetura e as metas mínimas continuam válidas; os comandos, não
-necessariamente.
+Dimensionamento escolhido: **3 nós de 4 GB e disco de 10 GB**. A memória sobra
+(caberiam 20 nós); o disco é o limite.
+
+**Em outra máquina, refaça o levantamento antes de seguir os comandos:**
+
+```bash
+./scripts/recon.sh | tee notas/recon-$(hostname).txt
+```
+
+A arquitetura e as metas mínimas continuam válidas em qualquer lugar; os
+comandos e o dimensionamento, não necessariamente.
 
 ## Estado atual
 

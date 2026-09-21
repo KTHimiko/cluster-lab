@@ -1,0 +1,65 @@
+
+== sistema
+Linux 7.2.4-arch1-2 x86_64
+PRETTY_NAME="Arch Linux"
+
+== cpu
+CPU(s): 16
+Nome do modelo: AMD Ryzen 7 5800X 8-Core Processor
+Thread(s) per núcleo: 2
+CPU(s) MHz de escala: 64%
+CPU(s) de nó0 NUMA: 0-15
+
+== memória
+               total       usada       livre    compart.  buff/cache  disponível
+Mem.:           46Gi       2,8Gi        41Gi        84Mi       3,3Gi        44Gi
+
+== disco
+/dev/sda2       246G  191G   53G  79% /
+Sist. Arq.      Tam. Usado Disp. Uso% Montado em
+
+== virtualização por hardware
+suportada (flags em 16 threads)
+/dev/kvm presente: crw-rw-rw- root:kvm
+
+== outros hipervisores (podem disputar a CPU)
+vboxnetflt vboxnetadp vboxdrv
+nenhum conflito detectado
+
+== ferramentas
+FALTA  qemu-system-x86_64     ausente
+FALTA  virsh                  ausente
+FALTA  virt-install           ausente
+FALTA  virt-manager           ausente
+FALTA  virt-clone             ausente
+FALTA  qemu-img               ausente
+FALTA  dnsmasq                ausente
+OK     git                    /usr/bin/git
+OK     python3                /usr/bin/python3
+OK     wget                   /usr/bin/wget
+FALTA  rsync                  ausente
+
+== pacotes (Arch)
+FALTA  libvirt                não instalado
+FALTA  qemu-desktop           não instalado
+FALTA  qemu-base              não instalado
+FALTA  virt-install           não instalado
+FALTA  virt-manager           não instalado
+FALTA  dnsmasq                não instalado
+OK     iptables-nft           1:1.8.13-1
+
+== grupos do usuário
+luan vboxusers input wheel
+-> NÃO pertence ao grupo libvirt (necessário; exige relogar após usermod)
+
+== estado do libvirt
+ativo agora: inactive
+habilitado no boot: not-found
+
+== libvirt
+virsh ausente — rode a etapa 0 de docs/01-sessao-sabado.md antes de seguir
+
+== capacidade estimada
+memória disponível: 45194 MB  ->  20 nós de 2 GB (reservando 4 GB ao hospedeiro)
+disco livre em /: 53 GB
+
