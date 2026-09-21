@@ -8,6 +8,8 @@ máquina, depois de uma pausa longa, ou numa sessão nova de assistente.
 Um cluster HPC de laboratório. Mas o cluster não é o objetivo final: é a peça
 central de um plano maior de mudança de carreira.
 
+**Repositório:** <https://github.com/KTHimiko/cluster-lab> (público)
+
 **Roteiro completo:** <https://claude.ai/artifact/HepfDfE6WMB2kZPeUvFzgc>
 (privado, abre na conta do Luan; o progresso fica salvo e sincroniza entre
 dispositivos)
@@ -84,3 +86,5 @@ Nada foi executado ainda. Nenhuma VM criada, nenhum serviço configurado. O
 repositório contém apenas documentação de execução e configuração de partida.
 
 Próxima ação concreta: ver `notas/proxima-acao.md`.
+
+O nó `head` já está no ar e acessível por SSH; falta o SLURM (Etapa 5).
