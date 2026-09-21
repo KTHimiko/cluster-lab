@@ -59,7 +59,7 @@ computação de alto desempenho operam em produção.
 
 ## Material de estudo
 
-Três documentos didáticos que reconstroem o cluster do zero, explicando cada
+Quatro documentos didáticos que reconstroem o cluster do zero, explicando cada
 etapa e o porquê dela, com perguntas de recuperação e calendário de revisão:
 [`docs/estudo/`](docs/estudo/00-como-usar.md).
 

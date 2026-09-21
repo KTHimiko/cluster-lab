@@ -52,9 +52,6 @@ roteiro. Um projeto, dois objetivos.
 
 ## Aviso de portabilidade
 
-Os comandos em `docs/01-sessao-sabado.md` foram escritos para uma máquina
-específica:
-
 Os comandos estão calibrados para a **máquina principal** (`192.168.0.10`):
 
 ```
