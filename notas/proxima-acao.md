@@ -156,3 +156,17 @@ Para publicar: `git push origin master`.
 
 **Nota:** commits das sessões 3 e 4 e o material de estudo ainda NÃO foram
 publicados, a pedido. Para publicar: `git push origin master`.
+
+### 2026-09-21 — reescrita de histórico não apaga do servidor
+- feito: repositório apagado e recriado do zero. Verificado: 25 commits,
+  todos com autoria única, contribuidor único, e os SHAs antigos retornando
+  "No commit found" na API e 404 na web.
+- quebrou: a reescrita com `filter-branch` mais force-push limpou o histórico
+  alcançável, e a API de contribuidores já listava só o dono — mas os commits
+  antigos continuavam **acessíveis por SHA direto** (HTTP 200), carregando o
+  rodapé removido.
+- aprendi: reescrever histórico torna objetos inalcançáveis por referência,
+  não os apaga do servidor. O GitHub mantém commits órfãos acessíveis por
+  tempo indeterminado. A única garantia é recriar o repositório. Se algum dia
+  vazar segredo num commit, force-push NÃO resolve: rotacione o segredo e
+  recrie o repositório.
