@@ -7,10 +7,6 @@
 
 **Agora:** Etapa 2 de `docs/01-sessao-sabado.md` — criar o pool de
 armazenamento, depois baixar a imagem base do Debian.
-sessão nova para o grupo `libvirt` valer, e seguir para a Etapa 1 — definir a
-rede do libvirt.
-`docs/01-sessao-sabado.md`), relogar para o grupo `libvirt` valer, e conferir
-com `./scripts/recon.sh`.
 
 ---
 
