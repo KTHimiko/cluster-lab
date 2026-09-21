@@ -115,6 +115,17 @@ Sessão 3 (Apptainer) também concluída:
 - `srun -N3 apptainer exec` e um sbatch de exemplo verificados: FastQC
   v0.12.1 respondendo nos três nós a partir de uma única imagem
 
-**Próxima:** sessão 4 — Nextflow com perfil SLURM.
+Sessão 4 (Nextflow) também concluída:
+
+- Java 17 e Nextflow 26.04 no `head` — só ele precisa, os nós executam
+  scripts shell gerados pelo pipeline
+- três perfis em `config/nextflow.config`: `local`, `slurm` e `container`
+- `workDir` em `/home/luan/nf-work`, sobre o NFS
+- pipeline de teste verificado nos dois modos: 6 tarefas distribuídas duas
+  por nó, cada uma como job do SLURM, e depois as mesmas dentro de container
+- registro de jobs concluídos habilitado (`jobcomp/filetxt`), já que o
+  `sacct` completo exigiria `slurmdbd` com banco
+
+**Próxima:** sessão 5 — pipeline `nf-core` completo em dado público.
 
 Próxima ação concreta: ver `notas/proxima-acao.md`.

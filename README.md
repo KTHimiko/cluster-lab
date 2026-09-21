@@ -39,7 +39,7 @@ computação de alto desempenho operam em produção.
 | Autenticação de nós | MUNGE (chave compartilhada) |
 | Armazenamento | NFS (`/home` exportado do head) |
 | Containers | Apptainer 1.5.3 (sem setuid) |
-| Orquestração de workflow | Nextflow + nf-core |
+| Orquestração de workflow | Nextflow 26.04 (executor SLURM) |
 
 ## Estado
 
@@ -54,6 +54,7 @@ computação de alto desempenho operam em produção.
 | NFS entre head e nós | **feito** |
 | `srun -N2 hostname` nos dois nós | **feito** |
 | Apptainer nos três nós, container via `srun` | **feito** |
+| Nextflow com executor SLURM + containers | **feito** |
 | Pipeline nf-core executado no cluster | pendente |
 
 ## Material de estudo

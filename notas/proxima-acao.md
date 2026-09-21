@@ -5,8 +5,8 @@
 > É isso que devolve o contexto no sábado seguinte em dois minutos em vez de
 > quarenta.
 
-**Agora:** sessão 4 — Nextflow com perfil SLURM, submetendo cada processo do
-pipeline como um job. Acesso: `ssh luan@192.168.122.10` (head).
+**Agora:** sessão 5 — pipeline `nf-core` completo em dado público, de ponta a
+ponta. Acesso: `ssh luan@192.168.122.10` (head).
 
 ---
 
@@ -137,3 +137,22 @@ O que quebrou é a parte mais valiosa — é o que vira resposta em entrevista.
 
 **Nota:** commits desta sessão ainda NÃO foram publicados no GitHub, a pedido.
 Para publicar: `git push origin master`.
+
+### 2026-09-21 — sessão 4: Nextflow sobre o cluster
+- feito: Java 17 e Nextflow 26.04 no head; perfis local/slurm/container;
+  pipeline de teste distribuindo 6 tarefas duas por nó, cada uma como job, e
+  o mesmo pipeline rodando dentro de container sem alterar uma linha.
+  Habilitado `jobcomp/filetxt` para ter histórico de jobs.
+- quebrou: duas falhas silenciosas. (1) `--tarefas 6` chega como string, e
+  `1..params.tarefas` conta errado sem erro — pedi 4 e rodaram 7, pedi 9 e
+  rodaram 20. (2) O Apptainer limpa o ambiente, então `$SLURM_JOB_ID` e
+  `$SLURM_CPUS_ON_NODE` somem dentro do container.
+- aprendi: (1) usar `as int` em parâmetro de linha de comando. (2)
+  `apptainer.envWhitelist` devolve as variáveis do SLURM ao container — e a
+  perda de `CPUS_ON_NODE` é a pior, porque ferramentas dimensionam
+  paralelismo por ela e passam a assumir a máquina inteira, competindo com
+  outros jobs sem nada falhar. (3) `bash .command.run` no diretório da tarefa
+  reproduz uma falha exatamente.
+
+**Nota:** commits das sessões 3 e 4 e o material de estudo ainda NÃO foram
+publicados, a pedido. Para publicar: `git push origin master`.
