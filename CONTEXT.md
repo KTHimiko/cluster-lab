@@ -82,7 +82,7 @@ comandos e o dimensionamento, não necessariamente.
 
 ## Estado atual
 
-Sessão 1 (sábado) em andamento, etapas 0 a 4 concluídas:
+Sessão 1 (sábado) concluída — todas as etapas de 0 a 5:
 
 - rede `default` do libvirt ativa com autostart, NAT e DHCP funcionando
 - pool de armazenamento `default` ativo
