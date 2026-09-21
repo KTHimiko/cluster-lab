@@ -14,3 +14,6 @@ id_ed25519*
 
 # cloud-init gerado (contém chave pública e hostname da máquina)
 build/
+
+# config do Obsidian, caso o repositorio seja aberto como vault
+.obsidian/
