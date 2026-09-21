@@ -203,3 +203,30 @@ publicados, a pedido. Para publicar: `git push origin master`.
   preciso mexer em systemd nem em parâmetro de boot. (3) `task/affinity` junto
   com `task/cgroup` é o que faz `nproc` respeitar a alocação, que era o
   problema real por trás da perda de `SLURM_CPUS_ON_NODE` dentro de container.
+
+### 2026-09-21 — cluster.sh: ligar e desligar sob demanda
+- feito: `scripts/cluster.sh` com `start`/`stop`/`status`/`ssh`. Esta máquina é
+  também o PC pessoal; três VMs de 4 GB subindo a cada boot tomam 12 GB de RAM
+  por nada. O script respeita a ordem que a dependência de NFS exige — ligar
+  `rede → pool → head → nós`, desligar `nós → head` — porque os nós montam o
+  `/home` do head e travariam numa montagem morta se o servidor sumisse antes.
+- quebrou: dois bugs, ambos só visíveis rodando de verdade.
+  (1) As verificações de estado liam texto traduzido: eu procurava `"Ativo: sim"`
+  na saída do `virsh`, mas `pool-info` diz `"Estado: executando"` — palavra
+  diferente — e em inglês nada casaria. Trocado por `virsh {net,pool}-list --name`
+  e `virsh list --name` com `grep -qx`, que comparam nomes, não prosa.
+  (2) O laço de espera contava `sinfo -h -o "%T" | grep -c idle` esperando 3,
+  mas o `sinfo` **agrupa nós por estado**: três nós ociosos produzem UMA linha
+  (`debug* up infinite 3 idle head,node[01-02]`). O contador nunca chegava a 3
+  e o script dava timeout de 180s com o cluster perfeitamente no ar. A flag
+  `-N` força uma linha por nó.
+- aprendi: (1) Toda verificação que depende de texto legível por humano é uma
+  verificação que quebra quando o idioma, a versão ou o formato mudam. Existe
+  quase sempre uma variante da ferramenta que devolve identificadores —
+  `--name`, `-h`, `--format=json` — e é essa que serve para script.
+  (2) O segundo bug é o mais perigoso dos dois porque **mentia sobre fracasso**:
+  o cluster subia certinho e o script reportava falha. Um erro que esconde
+  sucesso queima confiança na ferramenta e leva a ignorar avisos reais.
+  (3) `set -e` está deliberadamente fora: em `set -uo pipefail` cada falha é
+  tratada onde acontece, e um `grep` sem casamento (saída 1, situação normal
+  aqui) não derruba o script inteiro.
