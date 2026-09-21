@@ -1,0 +1,35 @@
+#cloud-config
+# Provisionamento do nó head. Usado por virt-install via --cloud-init.
+# Para os nós de cálculo, copie este arquivo trocando apenas o hostname.
+
+hostname: head
+fqdn: head.lab
+prefer_fqdn_over_hostname: false
+manage_etc_hosts: true
+
+users:
+  - name: luan
+    groups: [sudo]
+    shell: /bin/bash
+    sudo: ["ALL=(ALL) NOPASSWD:ALL"]
+    lock_passwd: true
+    ssh_authorized_keys:
+      # >>> COLE AQUI a saída de `cat ~/.ssh/id_ed25519.pub` <<<
+      - ssh-ed25519 SUBSTITUA_ESTA_LINHA_PELA_SUA_CHAVE_PUBLICA cluster-lab
+
+package_update: true
+packages:
+  - vim
+  - curl
+  - htop
+  - nfs-common
+  - chrony
+
+# Relógio sincronizado não é detalhe: MUNGE rejeita credencial com desvio de
+# tempo entre os nós, e o erro que aparece não menciona relógio nenhum.
+runcmd:
+  - systemctl enable --now chrony
+
+power_state:
+  mode: reboot
+  condition: true

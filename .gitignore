@@ -1,0 +1,13 @@
+# imagens de VM nunca entram no repositório
+*.qcow2
+*.img
+*.iso
+
+# chaves e segredos
+munge.key
+*.pem
+id_ed25519*
+
+# ruído de editor
+*.swp
+.DS_Store
