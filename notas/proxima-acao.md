@@ -5,8 +5,8 @@
 > É isso que devolve o contexto no sábado seguinte em dois minutos em vez de
 > quarenta.
 
-**Agora:** Etapas 2 e 3 de `docs/01-sessao-sabado.md` — pool de armazenamento
-e imagem base do Debian. O cloud-init do head já está gerado em `build/`.
+**Agora:** Etapa 5 — instalar e configurar SLURM e MUNGE dentro do head, até
+`srun hostname` responder. Acesso: `ssh luan@192.168.122.14`.
 
 ---
 
@@ -80,3 +80,17 @@ O que quebrou é a parte mais valiosa — é o que vira resposta em entrevista.
   nem pela ordem do dispositivo. Criado `scripts/make-seed.sh`, que monta o
   ISO com xorrisofs, rótulo `cidata`, e valida com blkid antes de terminar.
   Falha silenciosa é pior que falha barulhenta: a VM subia "perfeita".
+
+### 2026-09-21 — genericcloud é virtio-only
+- feito: `head` no ar e acessível. hostname `head`, usuário `luan` com sudo
+  sem senha, cloud-init `done`, chrony ativo e relógio sincronizado.
+- quebrou: o seed anexado como `device=cdrom` vai no barramento SATA, e a
+  imagem `genericcloud` do Debian não tem driver ATA/AHCI — o dispositivo não
+  existe dentro da VM. Sem datasource, o `ds-identify` desabilita o cloud-init
+  por completo: sem rede, sem hostname, `ssh.service` falhando por não ter
+  chaves de host.
+- aprendi: três coisas. (1) Seed de cloud-init em imagem cloud vai em virtio,
+  nunca em cdrom. (2) `--serial file` é obrigatório: quando a VM sobe sem
+  rede, o log de console é a única janela para dentro. (3) Ausência total de
+  menções a um serviço no log é sinal mais forte que erro — erro significa que
+  tentou; silêncio significa que nem foi chamado.

@@ -47,7 +47,7 @@ computação de alto desempenho operam em produção.
 |---|---|
 | Rede libvirt e pool de armazenamento | **feito** |
 | Imagem base Debian + disco copy-on-write | **feito** |
-| VM base provisionada com cloud-init | em andamento |
+| VM base provisionada com cloud-init | **feito** |
 | SLURM em nó único (`srun hostname`) | pendente |
 | Clonagem para 3 nós | pendente |
 | MUNGE com chave compartilhada | pendente |
