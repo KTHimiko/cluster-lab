@@ -17,3 +17,6 @@ build/
 
 # config do Obsidian, caso o repositorio seja aberto como vault
 .obsidian/
+
+# material de estudo e guias: pessoais, nao publicados
+docs/

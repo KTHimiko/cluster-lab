@@ -113,7 +113,7 @@ if command -v virsh >/dev/null 2>&1; then
   linha "VMs existentes";         $V list --all 2>&1 | head -8
 else
   linha "libvirt"
-  echo "virsh ausente — rode a etapa 0 de docs/01-sessao-sabado.md antes de seguir"
+  echo "virsh ausente — instale libvirt, qemu-desktop, virt-install e dnsmasq antes de seguir"
 fi
 
 linha "capacidade estimada"

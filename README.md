@@ -57,12 +57,6 @@ computação de alto desempenho operam em produção.
 | Nextflow com executor SLURM + containers | **feito** |
 | Pipeline nf-core executado no cluster | pendente |
 
-## Material de estudo
-
-Quatro documentos didáticos que reconstroem o cluster do zero, explicando cada
-etapa e o porquê dela, com perguntas de recuperação e calendário de revisão:
-[`docs/estudo/`](docs/estudo/00-como-usar.md).
-
 ## Continuidade
 
 Ao retomar em outra máquina ou depois de uma pausa, leia `CONTEXT.md` primeiro.
@@ -70,9 +64,9 @@ Ao retomar em outra máquina ou depois de uma pausa, leia `CONTEXT.md` primeiro.
 ## Estrutura
 
 ```
-docs/     guias de execução, uma sessão por arquivo
-config/   arquivos de configuração versionados (slurm.conf, exports, XML)
-notas/    diário de bordo e a próxima ação
+config/   configuração versionada: cloud-init, slurm.conf, hosts, nextflow
+scripts/  provisionamento e levantamento de ambiente
+notas/    diário de bordo, com o que quebrou em cada etapa
 ```
 
 ## Por que este projeto existe
