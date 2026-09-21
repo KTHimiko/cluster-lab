@@ -36,6 +36,7 @@ computação de alto desempenho operam em produção.
 | Virtualização | KVM / QEMU / libvirt |
 | Provisionamento | cloud-init, imagem cloud Debian |
 | Agendador | SLURM (`slurmctld`, `slurmd`) |
+| Controle de recursos | cgroup v2 (CPU e memória confinadas) |
 | Autenticação de nós | MUNGE (chave compartilhada) |
 | Armazenamento | NFS (`/home` exportado do head) |
 | Containers | Apptainer 1.5.3 (sem setuid) |
@@ -55,6 +56,7 @@ computação de alto desempenho operam em produção.
 | `srun -N2 hostname` nos dois nós | **feito** |
 | Apptainer nos três nós, container via `srun` | **feito** |
 | Nextflow com executor SLURM + containers | **feito** |
+| Confinamento de recursos por cgroup | **feito** |
 | Pipeline nf-core executado no cluster | **feito** |
 
 ## Continuidade

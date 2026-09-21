@@ -5,8 +5,9 @@
 > É isso que devolve o contexto no sábado seguinte em dois minutos em vez de
 > quarenta.
 
-**Agora:** sessão 6 — documentação final e diagrama de arquitetura no README,
-para o repositório ficar apresentável. Acesso: `ssh luan@192.168.122.10`.
+**Agora:** sessão 6 — documentação final e diagrama de arquitetura no README.
+O cluster já roda carga real (varreduras do clonal-lab). Acesso:
+`ssh luan@192.168.122.10`.
 
 ---
 
@@ -186,3 +187,19 @@ publicados, a pedido. Para publicar: `git push origin master`.
   ainda ensinam a forma velha. (2) `-r <versão>` não é formalidade: sem fixar,
   o mesmo comando roda código diferente em datas diferentes. (3) Nunca adaptei
   o pipeline — descrevi o cluster em vinte linhas e o resto funcionou.
+
+### 2026-09-21 — cgroups: os limites viraram restrições
+- feito: cgroup v2 configurado nos três nós. `ProctrackType=proctrack/cgroup`,
+  `TaskPlugin=task/cgroup,task/affinity`, `JobAcctGatherType=jobacct_gather/cgroup`,
+  e `SelectTypeParameters` de `CR_Core` para `CR_Core_Memory`.
+- quebrou: nada na configuração, mas o teste de antes e depois é o achado.
+  O mesmo job que pedia 128 MB e alocava 900 MB terminava como `COMPLETED`;
+  agora morre com `JobState=OUT_OF_MEMORY` e o slurmd registra
+  `task/cgroup: hit memory limit`. CPU também: um job de 1 núcleo passa a ver
+  `nproc = 1` em vez dos 2 da máquina.
+- aprendi: (1) `CR_Core` sozinho faz o escalonador **ignorar** o `--mem` dos
+  jobs — sem `CR_Core_Memory` a memória nem é recurso consumível. (2) Debian 12
+  já vem com hierarquia unificada e `Delegate=yes` no slurmd, então não foi
+  preciso mexer em systemd nem em parâmetro de boot. (3) `task/affinity` junto
+  com `task/cgroup` é o que faz `nproc` respeitar a alocação, que era o
+  problema real por trás da perda de `SLURM_CPUS_ON_NODE` dentro de container.
