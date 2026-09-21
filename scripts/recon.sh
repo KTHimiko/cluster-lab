@@ -102,9 +102,15 @@ echo "ativo agora: $(systemctl is-active libvirtd 2>/dev/null; true)"
 echo "habilitado no boot: $(systemctl is-enabled libvirtd 2>/dev/null; true)"
 
 if command -v virsh >/dev/null 2>&1; then
-  linha "redes libvirt";        virsh net-list --all 2>&1 | head -8
-  linha "pools de armazenamento"; virsh pool-list --all 2>&1 | head -8
-  linha "VMs existentes";       virsh list --all 2>&1 | head -8
+  # Sempre no escopo do sistema: por usuário comum o virsh cai em
+  # qemu:///session, que é um espaço separado e vazio.
+  V="virsh -c qemu:///system"
+  linha "URI"
+  echo "padrão desta sessão: $(virsh uri 2>/dev/null)"
+  echo "consultado abaixo:   qemu:///system"
+  linha "redes libvirt";          $V net-list --all 2>&1 | head -8
+  linha "pools de armazenamento"; $V pool-list --all 2>&1 | head -8
+  linha "VMs existentes";         $V list --all 2>&1 | head -8
 else
   linha "libvirt"
   echo "virsh ausente — rode a etapa 0 de docs/01-sessao-sabado.md antes de seguir"

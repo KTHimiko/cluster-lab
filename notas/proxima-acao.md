@@ -43,3 +43,11 @@ O que quebrou é a parte mais valiosa — é o que vira resposta em entrevista.
   negativo.
 - aprendi: `id -nG <usuário>` consulta a base; `id -nG` sozinho consulta o
   processo. Remover um grupo com sessão aberta deixa o GID órfão até relogar.
+
+### 2026-09-21 — a armadilha dos dois escopos
+- feito: descoberto que `virsh` de usuário comum conecta em `qemu:///session`,
+  não em `qemu:///system`. A rede `default` já existia no escopo do sistema,
+  inativa — o `net-list` vazio era ilusão de escopo, não ausência de rede.
+- aprendi: `qemu:///session` e `qemu:///system` são espaços completamente
+  separados. Fixar `LIBVIRT_DEFAULT_URI=qemu:///system` no shell evita horas
+  de confusão. O guia e o recon.sh foram corrigidos.
