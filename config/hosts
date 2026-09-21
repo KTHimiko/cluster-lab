@@ -1,0 +1,7 @@
+# /etc/hosts do cluster — idêntico nos três nós.
+# Os endereços são reservas DHCP fixas na rede libvirt `default`,
+# criadas com `virsh net-update default add ip-dhcp-host`.
+# Sem endereço estável, slurm.conf e NFS quebram a cada reboot.
+192.168.122.10  head
+192.168.122.11  node01
+192.168.122.12  node02

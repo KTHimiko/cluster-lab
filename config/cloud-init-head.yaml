@@ -22,8 +22,11 @@ packages:
   - vim
   - curl
   - htop
-  - nfs-common
   - chrony
+  # pilha do cluster: cada nó já nasce com o escalonador e a autenticação
+  - slurm-wlm
+  - munge
+  - nfs-common
 
 # Relógio sincronizado não é detalhe: MUNGE rejeita credencial com desvio de
 # tempo entre os nós, e o erro que aparece não menciona relógio nenhum.
