@@ -90,7 +90,6 @@ Sessão 1 (sábado) em andamento, etapas 0 a 4 concluídas:
 - nó `head` no ar e acessível por SSH, provisionado por cloud-init:
   hostname correto, usuário `luan` com sudo sem senha, chrony ativo e
   relógio sincronizado
-
 - SLURM 22.05.8 e MUNGE 0.5.15 no `head`: `srun`, `srun -n2` e `sbatch`
   verificados, nó em estado `idle`
 
