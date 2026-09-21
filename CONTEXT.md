@@ -91,7 +91,11 @@ Sessão 1 (sábado) em andamento, etapas 0 a 4 concluídas:
   hostname correto, usuário `luan` com sudo sem senha, chrony ativo e
   relógio sincronizado
 
-Falta a etapa 5 — SLURM e MUNGE dentro do `head` — para fechar a meta mínima
-do sábado, que é `srun hostname` responder.
+- SLURM 22.05.8 e MUNGE 0.5.15 no `head`: `srun`, `srun -n2` e `sbatch`
+  verificados, nó em estado `idle`
+
+**A sessão 1 (sábado) está completa** — a meta mínima era `srun hostname`
+responder, e responde. A próxima é a sessão 2 (domingo): clonar para três
+nós, distribuir a chave do MUNGE, montar o NFS e fechar com `srun -N2`.
 
 Próxima ação concreta: ver `notas/proxima-acao.md`.

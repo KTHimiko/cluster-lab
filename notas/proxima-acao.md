@@ -5,8 +5,8 @@
 > É isso que devolve o contexto no sábado seguinte em dois minutos em vez de
 > quarenta.
 
-**Agora:** Etapa 5 — instalar e configurar SLURM e MUNGE dentro do head, até
-`srun hostname` responder. Acesso: `ssh luan@192.168.122.14`.
+**Agora:** sessão 2 (domingo) — `docs/02-sessao-domingo.md`. Clonar o head em
+node01 e node02, MUNGE com chave compartilhada, NFS, e fechar com `srun -N2`.
 
 ---
 
@@ -94,3 +94,12 @@ O que quebrou é a parte mais valiosa — é o que vira resposta em entrevista.
   rede, o log de console é a única janela para dentro. (3) Ausência total de
   menções a um serviço no log é sinal mais forte que erro — erro significa que
   tentou; silêncio significa que nem foi chamado.
+
+### 2026-09-21 — sessão 1 completa
+- feito: SLURM 22.05.8 e MUNGE 0.5.15 instalados no `head`. Partição `debug`
+  no ar, nó em `idle`, `srun hostname`, `srun -n2` e `sbatch` verificados.
+- quebrou: nada no SLURM. A topologia foi explicitada no `slurm.conf`
+  (Sockets=2 CoresPerSocket=1 ThreadsPerCore=1) para evitar o nó cair em
+  `drain` por divergência entre o detectado e o configurado.
+- aprendi: `RealMemory` no slurm.conf precisa ficar abaixo da memória real
+  (3800 para 3927 MB) — se passar, o nó é marcado como inválido.
