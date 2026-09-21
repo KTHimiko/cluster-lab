@@ -66,3 +66,17 @@ O que quebrou é a parte mais valiosa — é o que vira resposta em entrevista.
 - aprendi: material específico da máquina (chave, hostname) não entra no
   repositório. Versiona-se o template e gera-se o resto; assim o repositório
   fica publicável sem decisão sobre o que expor.
+
+### 2026-09-21 — o seed que o cloud-init não achava
+- feito: primeira VM criada com `virt-install --cloud-init` subiu sem o
+  usuário e sem a chave. Diagnóstico por inspeção offline do disco (qemu-nbd
+  + mount ro,noload) mostrou `user-data.txt` vazio e datasource
+  `NoCloud [seed=dmi]`. O log do guest tinha a prova: `blkid -tLABEL=cidata`
+  não encontrava nada.
+- quebrou: `virt-install --cloud-init` (5.1) anexa o ISO sem o rótulo de
+  volume `cidata` que o cloud-init procura — e apaga o arquivo do host logo
+  após iniciar, impedindo inspeção.
+- aprendi: o NoCloud localiza o seed pelo RÓTULO do volume, não pelo caminho
+  nem pela ordem do dispositivo. Criado `scripts/make-seed.sh`, que monta o
+  ISO com xorrisofs, rótulo `cidata`, e valida com blkid antes de terminar.
+  Falha silenciosa é pior que falha barulhenta: a VM subia "perfeita".
