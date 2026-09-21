@@ -5,7 +5,9 @@
 > É isso que devolve o contexto no sábado seguinte em dois minutos em vez de
 > quarenta.
 
-**Agora:** instalar as ferramentas de virtualização (etapa 0 de
+**Agora:** habilitar o libvirtd (`sudo systemctl enable --now libvirtd`), abrir uma
+sessão nova para o grupo `libvirt` valer, e seguir para a Etapa 1 — definir a
+rede do libvirt.
 `docs/01-sessao-sabado.md`), relogar para o grupo `libvirt` valer, e conferir
 com `./scripts/recon.sh`.
 
@@ -23,4 +25,12 @@ O que quebrou é a parte mais valiosa — é o que vira resposta em entrevista.
   só aparecia quando alguma ferramenta estava ausente, por isso passou
   despercebido na outra máquina.
 - aprendi: `printf '--  ...'` é interpretado como fim de opções; usar
+
+### 2026-09-21 — remoção do VirtualBox
+- feito: VM `windows` (29 GB) e pacotes virtualbox removidos; módulos
+  descarregados; grupo vboxusers eliminado. Disco: 53 GB -> 94 GB livres.
+- quebrou: `modprobe -r` não descarrega módulo cujo arquivo já foi apagado
+  pelo pacman; foi preciso `rmmod` na ordem de dependência.
+- aprendi: remover o pacote não descarrega o módulo em memória — os dois
+  passos são independentes.
   argumento posicional resolve.

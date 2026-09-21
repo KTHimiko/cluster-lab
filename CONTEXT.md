@@ -57,13 +57,17 @@ Os comandos estão calibrados para a **máquina principal** (`192.168.0.10`):
 
 ```
 Arch Linux · kernel 7.2.4 · Ryzen 7 5800X, 16 threads · 46 GB RAM
-53 GB livres em / (disco a 79% — a restrição desta máquina)
-/dev/kvm presente · VirtualBox 7.2 instalado e convivendo
-estado inicial: nenhuma ferramenta de virtualização instalada
+94 GB livres em / · /dev/kvm presente · nenhum outro hipervisor
+libvirt 12.7, qemu 11.1, virt-install e dnsmasq instalados
+usuário no grupo libvirt · libvirtd ainda não habilitado
 ```
 
-Dimensionamento escolhido: **3 nós de 4 GB e disco de 10 GB**. A memória sobra
-(caberiam 20 nós); o disco é o limite.
+O VirtualBox 7.2 e sua VM `windows` foram removidos em 2026-09-21, liberando
+40 GB. Era o único concorrente pelo `/dev/kvm` e a razão de o disco ser
+gargalo — não é mais.
+
+Dimensionamento escolhido: **3 nós de 4 GB e disco de 20 GB**. Sobra memória
+(caberiam 20 nós) e sobra disco.
 
 **Em outra máquina, refaça o levantamento antes de seguir os comandos:**
 
