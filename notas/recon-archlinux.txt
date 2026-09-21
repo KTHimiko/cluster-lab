@@ -7,12 +7,12 @@ PRETTY_NAME="Arch Linux"
 CPU(s): 16
 Nome do modelo: AMD Ryzen 7 5800X 8-Core Processor
 Thread(s) per núcleo: 2
-CPU(s) MHz de escala: 53%
+CPU(s) MHz de escala: 44%
 CPU(s) de nó0 NUMA: 0-15
 
 == memória
                total       usada       livre    compart.  buff/cache  disponível
-Mem.:           46Gi       2,5Gi        38Gi        42Mi       6,0Gi        44Gi
+Mem.:           46Gi       2,5Gi        39Gi        43Mi       5,6Gi        44Gi
 
 == disco
 /dev/sda2       246G  150G   94G  62% /
@@ -49,13 +49,16 @@ OK     dnsmasq                2.93-1
 OK     iptables-nft           1:1.8.13-1
 
 == grupos do usuário
-luan id: impossível encontrar nome do grupo ID 108
-108 input wheel
-id: impossível encontrar nome do grupo ID 108
--> NÃO pertence ao grupo libvirt (necessário; exige relogar após usermod)
+luan wheel input libvirt
+-> base de dados: pertence ao grupo libvirt
+-> sessão atual: grupo ainda não vale aqui (abra um terminal novo)
+-> GID órfão nesta sessão: 108 (grupo removido; some ao relogar)
+
+== acesso ao libvirt
+virsh responde sem sudo -> pronto para a etapa 1
 
 == estado do libvirt
-ativo agora: inactive
+ativo agora: active
 habilitado no boot: enabled
 
 == redes libvirt
@@ -74,6 +77,6 @@ habilitado no boot: enabled
 
 
 == capacidade estimada
-memória disponível: 45481 MB  ->  20 nós de 2 GB (reservando 4 GB ao hospedeiro)
+memória disponível: 45502 MB  ->  20 nós de 2 GB (reservando 4 GB ao hospedeiro)
 disco livre em /: 94 GB
 

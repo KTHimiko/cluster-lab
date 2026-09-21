@@ -62,9 +62,40 @@ for p in libvirt qemu-desktop qemu-base virt-install virt-manager dnsmasq iptabl
 done
 
 linha "grupos do usuário"
-id -nG
-id -nG | grep -qw libvirt && echo "-> pertence ao grupo libvirt" \
-  || echo "-> NÃO pertence ao grupo libvirt (necessário; exige relogar após usermod)"
+eu=$(id -un)
+# id -nG sem argumento lê as credenciais do processo e falha se algum GID
+# ficou órfão (grupo removido com a sessão aberta). Com o nome do usuário,
+# lê a base de dados, que é a fonte de verdade.
+id -nG "$eu" 2>/dev/null || echo "(não foi possível listar)"
+
+if id -nG "$eu" 2>/dev/null | grep -qw libvirt; then
+  echo "-> base de dados: pertence ao grupo libvirt"
+else
+  echo "-> base de dados: NÃO pertence — rode: sudo usermod -aG libvirt $eu"
+fi
+
+gid_libvirt=$(getent group libvirt 2>/dev/null | cut -d: -f3)
+if [ -n "${gid_libvirt:-}" ] && id -G 2>/dev/null | tr ' ' '\n' | grep -qx "$gid_libvirt"; then
+  echo "-> sessão atual: grupo libvirt já ativo"
+else
+  echo "-> sessão atual: grupo ainda não vale aqui (abra um terminal novo)"
+fi
+
+orfaos=$(id -G 2>/dev/null | tr ' ' '\n' | while read -r g; do
+  getent group "$g" >/dev/null 2>&1 || printf '%s ' "$g"
+done)
+[ -n "${orfaos:-}" ] && echo "-> GID órfão nesta sessão: ${orfaos}(grupo removido; some ao relogar)"
+
+linha "acesso ao libvirt"
+if command -v virsh >/dev/null 2>&1; then
+  if virsh net-list --all >/dev/null 2>&1; then
+    echo "virsh responde sem sudo -> pronto para a etapa 1"
+  else
+    echo "virsh exige sudo ou sessão nova"
+  fi
+else
+  echo "virsh ausente"
+fi
 
 linha "estado do libvirt"
 echo "ativo agora: $(systemctl is-active libvirtd 2>/dev/null; true)"

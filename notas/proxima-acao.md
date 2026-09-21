@@ -34,3 +34,12 @@ O que quebrou é a parte mais valiosa — é o que vira resposta em entrevista.
 - aprendi: remover o pacote não descarrega o módulo em memória — os dois
   passos são independentes.
   argumento posicional resolve.
+
+### 2026-09-21 — pós-remoção
+- feito: libvirtd habilitado e ativo; recon.sh corrigido para ler grupos da
+  base de dados em vez das credenciais do processo.
+- quebrou: `id -nG` sem argumento falha inteiro se um GID da sessão ficou
+  órfão — e isso derrubava a verificação do grupo libvirt, gerando falso
+  negativo.
+- aprendi: `id -nG <usuário>` consulta a base; `id -nG` sozinho consulta o
+  processo. Remover um grupo com sessão aberta deixa o GID órfão até relogar.
