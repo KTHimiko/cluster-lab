@@ -55,7 +55,7 @@ computação de alto desempenho operam em produção.
 | `srun -N2 hostname` nos dois nós | **feito** |
 | Apptainer nos três nós, container via `srun` | **feito** |
 | Nextflow com executor SLURM + containers | **feito** |
-| Pipeline nf-core executado no cluster | pendente |
+| Pipeline nf-core executado no cluster | **feito** |
 
 ## Continuidade
 

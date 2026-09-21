@@ -5,8 +5,8 @@
 > É isso que devolve o contexto no sábado seguinte em dois minutos em vez de
 > quarenta.
 
-**Agora:** sessão 5 — pipeline `nf-core` completo em dado público, de ponta a
-ponta. Acesso: `ssh luan@192.168.122.10` (head).
+**Agora:** sessão 6 — documentação final e diagrama de arquitetura no README,
+para o repositório ficar apresentável. Acesso: `ssh luan@192.168.122.10`.
 
 ---
 
@@ -170,3 +170,19 @@ publicados, a pedido. Para publicar: `git push origin master`.
   tempo indeterminado. A única garantia é recriar o repositório. Se algum dia
   vazar segredo num commit, force-push NÃO resolve: rotacione o segredo e
   recrie o repositório.
+
+### 2026-09-21 — sessão 5: pipeline nf-core de ponta a ponta
+- feito: `nf-core/demo` 1.2.0 executado com sucesso no cluster. Oito processos
+  viraram jobs independentes distribuídos pelos três nós; 76 arquivos de
+  saída, 29 MB, relatório MultiQC de 2,4 MB. O cache de containers da sessão 3
+  foi reaproveitado.
+- quebrou: nada nesta execução, mas a configuração existe justamente para
+  evitar o modo de falha mais cruel do conjunto — pipeline nf-core declara
+  requisitos para cluster grande (um processo pode pedir 36 GB), e sem
+  `resourceLimits` o SLURM aceita o job e ele fica PENDING para sempre,
+  esperando um nó que não existe. Nada falha, nada avisa.
+- aprendi: (1) `resourceLimits` é o mecanismo atual; `--max_memory` faz
+  pipelines recentes falharem na validação de esquema, e tutoriais antigos
+  ainda ensinam a forma velha. (2) `-r <versão>` não é formalidade: sem fixar,
+  o mesmo comando roda código diferente em datas diferentes. (3) Nunca adaptei
+  o pipeline — descrevi o cluster em vinte linhas e o resto funcionou.

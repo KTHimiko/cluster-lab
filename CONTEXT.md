@@ -123,6 +123,17 @@ Sessão 4 (Nextflow) também concluída:
 - registro de jobs concluídos habilitado (`jobcomp/filetxt`), já que o
   `sacct` completo exigiria `slurmdbd` com banco
 
-**Próxima:** sessão 5 — pipeline `nf-core` completo em dado público.
+Sessão 5 (nf-core) também concluída:
+
+- `nf-core/demo` 1.2.0 executado de ponta a ponta com `-profile test,apptainer`
+  e configuração própria do cluster (`config/nfcore-cluster.config`)
+- 8 processos distribuídos pelos três nós como jobs independentes: SEQTK_TRIM
+  e FASTQC em paralelo por amostra, COWPY e MULTIQC agregando
+- 76 arquivos de saída, 29 MB, com relatório MultiQC de 2,4 MB
+- a peça que faz funcionar é `resourceLimits`: sem truncar os pedidos do
+  pipeline ao tamanho real dos nós, os jobs ficariam pendentes para sempre
+
+**Próxima:** sessão 6 — documentação final e diagrama, para o repositório ficar
+apresentável a quem chega sem contexto.
 
 Próxima ação concreta: ver `notas/proxima-acao.md`.
